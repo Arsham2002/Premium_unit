@@ -1,0 +1,65 @@
+@model IEnumerable<PremiumUnit.Models.Workshop>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListSubmissionInterval)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfActivity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployerPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Premium)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListSubmissionInterval)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfActivity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivityStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployerPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Premium)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.WorkshopCode">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.WorkshopCode">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WorkshopCode">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
