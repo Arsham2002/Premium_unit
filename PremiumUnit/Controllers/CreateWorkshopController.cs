@@ -19,139 +19,44 @@ namespace PremiumUnit.Controllers
             _context = context;
         }
 
-        // GET: Workshops
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Workshop.ToListAsync());
-        }
-
-        // GET: Workshops/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var workshop = await _context.Workshop
-                .FirstOrDefaultAsync(m => m.WorkshopCode == id);
-            if (workshop == null)
-            {
-                return NotFound();
-            }
-
-            return View(workshop);
-        }
-
-        // GET: Workshops/Create
+        // GET: نمایش فرم ایجاد کارگاه
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Workshops/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        // POST: دریافت اطلاعات و ذخیره در دیتابیس
+        [HttpPost] 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkshopCode,ListSubmissionInterval,TypeOfActivity,ActivityStartDate,EmployerName,EmployerPhoneNumber,Premium")] Workshop workshop)
+        public async Task<IActionResult> Create(WorkshopViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var workshop = new Workshop
+                {
+                    ListSubmissionInterval = DetermineInterval(model.TypeOfActivity) // مقدار خاص را مشخص می‌کنیم
+                    TypeOfActivity = model.TypeOfActivity,
+                    ActivityStartDate = DateTime.Now,
+                    EmployerName = model.EmployerName,
+                    EmployerPhoneNumber = model.EmployerPhoneNumber
+                };
+
                 _context.Add(workshop);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(workshop);
-        }
+            return View(model);
+        } 
 
-        // GET: Workshops/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // متد برای تعیین مقدار خاص (Level)
+        private string DetermineInterval(ActivityType TypeOfActivity)
         {
-            if (id == null)
+            return TypeOfActivity switch
             {
-                return NotFound();
-            }
-
-            var workshop = await _context.Workshop.FindAsync(id);
-            if (workshop == null)
-            {
-                return NotFound();
-            }
-            return View(workshop);
+                Manufacturing => TimeSpan.FromDays(30),
+                Maintenance => TimeSpan.FromDays(60),
+                Repair => TimeSpan.FromDays(90)
+            };
         }
 
-        // POST: Workshops/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("WorkshopCode,ListSubmissionInterval,TypeOfActivity,ActivityStartDate,EmployerName,EmployerPhoneNumber,Premium")] Workshop workshop)
-        {
-            if (id != workshop.WorkshopCode)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(workshop);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WorkshopExists(workshop.WorkshopCode))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(workshop);
-        }
-
-        // GET: Workshops/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var workshop = await _context.Workshop
-                .FirstOrDefaultAsync(m => m.WorkshopCode == id);
-            if (workshop == null)
-            {
-                return NotFound();
-            }
-
-            return View(workshop);
-        }
-
-        // POST: Workshops/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var workshop = await _context.Workshop.FindAsync(id);
-            if (workshop != null)
-            {
-                _context.Workshop.Remove(workshop);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool WorkshopExists(int id)
-        {
-            return _context.Workshop.Any(e => e.WorkshopCode == id);
-        }
     }
 }
