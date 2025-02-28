@@ -13,4 +13,5 @@ public class Invoice
     public DateTime? PaymentDate { get; set; }
     [DataType(DataType.Date)]
     public DateTime PenaltyBaseDate { get; set; }
+    public int WorkshopCode { get; set; }
 }
