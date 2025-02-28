@@ -45,8 +45,12 @@
     </div>
 
     <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary">بازگشت</button>
-        <button type="button" class="btn btn-secondary">پرداخت</button>
+        <form asp-controller="ListInvoices" asp-action="Index" asp-route-id="@Model.WorkshopCode">
+            <button type="submit" class="btn btn-primary">بازگشت</button>
+        </form>
+        <form asp-action="Edit" asp-route-id="@Model.WorkshopCode" method="post">
+            <button type="submit" class="btn btn-secondary">پرداخت</button>
+        </form>
     </div>
     </form>
 </div>
