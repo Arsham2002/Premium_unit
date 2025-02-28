@@ -66,7 +66,7 @@ namespace PremiumUnit.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { id = WorkshopCode });
+                return RedirectToAction(nameof(Index), new { id = invoice.WorkshopCode });
             }
             return View(invoice);
         }
