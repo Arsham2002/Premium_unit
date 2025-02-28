@@ -12,14 +12,19 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="ListSubmissionInterval" class="control-label"></label>
                 <input asp-for="ListSubmissionInterval" class="form-control" />
                 <span asp-validation-for="ListSubmissionInterval" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="TypeOfActivity" class="control-label"></label>
-                <select asp-for="TypeOfActivity" class="form-control"></select>
+                <select asp-for="TypeOfActivity" class="form-control">
+                    @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
                 <span asp-validation-for="TypeOfActivity" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,11 +42,11 @@
                 <input asp-for="EmployerPhoneNumber" class="form-control" />
                 <span asp-validation-for="EmployerPhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Premium" class="control-label"></label>
                 <input asp-for="Premium" class="form-control" />
                 <span asp-validation-for="Premium" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

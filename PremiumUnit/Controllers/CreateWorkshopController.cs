@@ -18,10 +18,32 @@ namespace PremiumUnit.Controllers
         {
             _context = context;
         }
+       public async Task<IActionResult> Index()
+        {
+            return View(await _context.Workshop.ToListAsync());
+        }
 
+        // GET: Workshops/Details/5
+        public async Task<IActionResult> Details(int? id)   
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workshop = await _context.Workshop
+                .FirstOrDefaultAsync(m => m.WorkshopCode == id);
+            if (workshop == null)
+            {
+                return NotFound();
+            }
+
+            return View(workshop);
+        }
         // GET: نمایش فرم ایجاد کارگاه
         public IActionResult Create()
         {
+            ViewBag.ActivityTypes = Enum.GetValues(typeof(ActivityType)).Cast<ActivityType>().ToList();
             return View();
         }
 
