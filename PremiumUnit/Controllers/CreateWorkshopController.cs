@@ -66,6 +66,7 @@ namespace PremiumUnit.Controllers
 
                 _context.Add(workshop);
                 await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(model);
         } 
@@ -160,7 +161,8 @@ namespace PremiumUnit.Controllers
             {
                 ActivityType.Manufacturing => TimeSpan.FromDays(30),
                 ActivityType.Maintenance => TimeSpan.FromDays(60),
-                ActivityType.Repair => TimeSpan.FromDays(90)
+                ActivityType.Repair => TimeSpan.FromDays(90),
+                _ => TimeSpan.FromDays(0)
             };
         }
 
