@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PremiumUnit.Data;
 using PremiumUnit.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PremiumUnit.Controllers
 {
@@ -58,7 +59,7 @@ namespace PremiumUnit.Controllers
                 {
                     ListSubmissionInterval = DetermineInterval(model.TypeOfActivity), // مقدار خاص را مشخص می‌کنیم
                     TypeOfActivity = model.TypeOfActivity,
-                    ActivityStartDate = DateTime.Now,
+                    ActivityStartDate = model.ActivityStartDate,
                     EmployerName = model.EmployerName,
                     EmployerPhoneNumber = model.EmployerPhoneNumber
                 };
@@ -68,6 +69,89 @@ namespace PremiumUnit.Controllers
             }
             return View(model);
         } 
+        // GET: Workshops/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workshop = await _context.Workshop.FindAsync(id);
+            if (workshop == null)
+            {
+                return NotFound();
+            }
+            return View(workshop);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("WorkshopCode,ListSubmissionInterval,TypeOfActivity,ActivityStartDate,EmployerName,EmployerPhoneNumber,Premium")] Workshop workshop)
+        {
+            if (id != workshop.WorkshopCode)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(workshop);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!WorkshopExists(workshop.WorkshopCode))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(workshop);
+        }
+
+        // GET: Workshops/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var workshop = await _context.Workshop
+                .FirstOrDefaultAsync(m => m.WorkshopCode == id);
+            if (workshop == null)
+            {
+                return NotFound();
+            }
+
+            return View(workshop);
+        }
+        // POST: Workshops/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var workshop = await _context.Workshop.FindAsync(id);
+            if (workshop != null)
+            {
+                _context.Workshop.Remove(workshop);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool WorkshopExists(int id)
+        {
+            return _context.Workshop.Any(e => e.WorkshopCode == id);
+        }
 
         // متد برای تعیین مقدار خاص (Level)
         private TimeSpan DetermineInterval(ActivityType TypeOfActivity)
