@@ -10,11 +10,11 @@ using PremiumUnit.Models;
 
 namespace PremiumUnit.Controllers
 {
-    public class InvoicesController : Controller
+    public class ShowInvoiceDetailsController : Controller
     {
         private readonly PremiumUnitContext _context;
 
-        public InvoicesController(PremiumUnitContext context)
+        public ShowInvoiceDetailsController(PremiumUnitContext context)
         {
             _context = context;
         }
@@ -36,39 +36,20 @@ namespace PremiumUnit.Controllers
             return View(invoice);
         }
 
-        // POST: Invoices/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,IssueDate,PaymentDate,PenaltyBaseDate,WorkshopCode")] Invoice invoice)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != invoice.Id)
+            var invoice = await _context.Invoice.FindAsync(id);
+            if (invoice == null)
             {
                 return NotFound();
             }
+
             invoice.PaymentDate = DateTime.Now;
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(invoice);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InvoiceExists(invoice.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index), new { id = invoice.WorkshopCode });
-            }
-            return View(invoice);
+            _context.Update(invoice);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), "ListInvoices", new { id = invoice.WorkshopCode });
         }
 
         private bool InvoiceExists(int id)
