@@ -47,7 +47,7 @@ namespace PremiumUnit.Controllers
             {
                 return NotFound();
             }
-
+            invoice.PaymentDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 try
