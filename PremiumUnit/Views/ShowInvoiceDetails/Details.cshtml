@@ -4,39 +4,49 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h3 class='row'>اطلاعات صورت حساب شماره</h3>
+<h3 asp-controller="ShowInvoiceDetails" asp-action="Details" asp-route-id="@Model.WorkshopCode" class="full-row-link">@Html.DisplayFor(modelItem => Model.Id, new { htmlAttributes = new { @class = "h3 row" } })
 
-<div>
-    <h4>Invoice</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IssueDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IssueDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PaymentDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PaymentDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PenaltyBaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PenaltyBaseDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container mt-5">
+    <form>
+    <div class="row mb-3">
+        <div class="col">
+            <div class='row'>:تاریخ صدور</div>
+            <div class='row text-center pt-3'>
+                @Html.DisplayFor(modelItem => modelItem.IssueDate, new { htmlAttributes = new { @class = "h4" } })
+            </div>
+        </div>
+        <div class="col">
+            <div class='row'>:مبلغ</div>
+            <div class='row text-center pt-3'>
+                @Html.DisplayFor(modelItem => modelItem.Amount, new { htmlAttributes = new { @class = "h4" } })
+            </div>
+        </div>
+        <div class="col">
+            <div class='row'>:وضعیت</div>
+
+            @{if (Model.PaymentDate != null )
+            {
+                <div class="text-center row">
+                    <h5 class="text-dark pt-2">‌پرداخت‌شده</h5>
+                </div>
+            }
+            else
+            {
+                <div class="text-center row">
+                    <h5 class='text-danger pt-2'> پرداخت‌نشده</h5>
+                </div>
+            }}
+        </div>
+    </div>
+    
+    <div class="mb-3 justify-content-start p-3">
+        <p>این صورت‌حساب به منزله هزینه ثبت کارگاه در سامانه بوده و مدارک ارسال‌شده پس از پرداخت آن بررسی خواهند شد</p>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-primary">بازگشت</button>
+        <button type="button" class="btn btn-secondary">پرداخت</button>
+    </div>
+    </form>
 </div>
