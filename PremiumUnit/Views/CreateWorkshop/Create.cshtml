@@ -23,30 +23,35 @@
                 <input asp-for="ListSubmissionInterval" class="form-control" />
                 <span asp-validation-for="ListSubmissionInterval" class="text-danger"></span>
             </div> *@
-            <div class="form-group">
-                <label asp-for="TypeOfActivity" class="control-label">نوع فعالیت</label>
-                <select asp-for="TypeOfActivity" class="form-select">
-                    @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
-                    {
-                        <option value="@item">@item</option>
-                    }
-                </select>
-                <span asp-validation-for="TypeOfActivity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActivityStartDate" class="control-label">تاریخ شروع فعالیت</label>
-                <input asp-for="ActivityStartDate" class="form-control" />
-                <span asp-validation-for="ActivityStartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmployerName" class="control-label">نام و نام‌خانوادگی کارفرما</label>
-                <input asp-for="EmployerName" class="form-control" />
-                <span asp-validation-for="EmployerName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmployerPhoneNumber" class="control-label">شماره تلفن کارفرما</label>
-                <input asp-for="EmployerPhoneNumber" class="form-control" />
-                <span asp-validation-for="EmployerPhoneNumber" class="text-danger"></span>
+          <div class="together">  
+                    <div class="form-group">
+                        <label asp-for="EmployerName" class="control-label">نام و نام‌خانوادگی کارفرما</label>
+                        <input asp-for="EmployerName" class="form-control" />
+                        <span asp-validation-for="EmployerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EmployerPhoneNumber" class="control-label">شماره تلفن کارفرما</label>
+                        <input asp-for="EmployerPhoneNumber" class="form-control" />
+                        <span asp-validation-for="EmployerPhoneNumber" class="text-danger"></span>
+                    </div>
+            </div>            
+
+            <div class="together">
+                    <div class="form-group">
+                        <label asp-for="TypeOfActivity" class="control-label">نوع فعالیت</label>
+                        <select asp-for="TypeOfActivity" class="form-select">
+                            @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TypeOfActivity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ActivityStartDate" class="control-label">تاریخ شروع فعالیت</label>
+                        <input asp-for="ActivityStartDate" class="form-control" />
+                        <span asp-validation-for="ActivityStartDate" class="text-danger"></span>
+                    </div>
             </div>
             @* <div class="form-group">
                 <label asp-for="Premium" class="control-label"></label>
