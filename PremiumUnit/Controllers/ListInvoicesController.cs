@@ -14,6 +14,11 @@ namespace PremiumUnit.Controllers
     {
         private readonly PremiumUnitContext _context;
 
+        public ListInvoicesController(PremiumUnitContext context)
+        {
+            _context = context;
+        }
+
         public async Task<IActionResult> Index(int? code)
         {
             if (code == null)
