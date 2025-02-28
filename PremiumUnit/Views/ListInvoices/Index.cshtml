@@ -1,0 +1,51 @@
+@model IEnumerable<PremiumUnit.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class='text-end mb-3 font-weight-bold'>صورت‌حساب‌ها</h3>
+
+<table class="table table-striped  table-bordered  table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" class="text-center">وضعیت پرداخت</th>
+            <th scope="col" class="text-center">(ریال)مبلغ</th>
+            <th scope="col" class="text-center">تاریخ صدور</th>
+            <th scope="col" class="text-center">شماره</th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            @{if (item.PaymentDate != null )
+            {
+                <td class="text-center">
+                    <h5 class="text-dark pt-2">‌پرداخت‌شده</h5>
+                </td>
+            }
+            else
+            {
+                <td class="text-center">
+                    <h5 class='text-danger pt-2'> پرداخت‌نشده</h5>
+                </td>
+            }}
+
+            <td class="text-center pt-3">
+                @Html.DisplayFor(modelItem => item.Amount, new { htmlAttributes = new { @class = "h4" } })
+            </td>
+            <td class="text-center pt-3">
+                @Html.DisplayFor(modelItem => item.IssueDate, new { htmlAttributes = new { @class = "h4" } })
+            </td>
+            <td class="text-center pt-3">
+                <a href="@Url.Action("Details", "YourControllerName", new { id = item.Id })" class="full-row-link">@Html.DisplayFor(modelItem => item.Id, new { htmlAttributes = new { @class = "h4" } })</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<button type="button" class="btn"> 
+    <a href="#" class="btn btn-dark"> بازگشت </a>
+</button>
