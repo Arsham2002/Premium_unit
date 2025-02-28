@@ -28,13 +28,13 @@ namespace PremiumUnit.Controllers
         // POST: دریافت اطلاعات و ذخیره در دیتابیس
         [HttpPost] 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(WorkshopViewModel model)
+        public async Task<IActionResult> Create(Workshop model)
         {
             if (ModelState.IsValid)
             {
                 var workshop = new Workshop
                 {
-                    ListSubmissionInterval = DetermineInterval(model.TypeOfActivity) // مقدار خاص را مشخص می‌کنیم
+                    ListSubmissionInterval = DetermineInterval(model.TypeOfActivity), // مقدار خاص را مشخص می‌کنیم
                     TypeOfActivity = model.TypeOfActivity,
                     ActivityStartDate = DateTime.Now,
                     EmployerName = model.EmployerName,
@@ -48,13 +48,13 @@ namespace PremiumUnit.Controllers
         } 
 
         // متد برای تعیین مقدار خاص (Level)
-        private string DetermineInterval(ActivityType TypeOfActivity)
+        private TimeSpan DetermineInterval(ActivityType TypeOfActivity)
         {
             return TypeOfActivity switch
             {
-                Manufacturing => TimeSpan.FromDays(30),
-                Maintenance => TimeSpan.FromDays(60),
-                Repair => TimeSpan.FromDays(90)
+                ActivityType.Manufacturing => TimeSpan.FromDays(30),
+                ActivityType.Maintenance => TimeSpan.FromDays(60),
+                ActivityType.Repair => TimeSpan.FromDays(90)
             };
         }
 
