@@ -39,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.IssueDate, new { htmlAttributes = new { @class = "h4" } })
             </td>
             <td class="text-center pt-3">
-                <a href="@Url.Action("Details", "YourControllerName", new { id = item.Id })" class="full-row-link">@Html.DisplayFor(modelItem => item.Id, new { htmlAttributes = new { @class = "h4" } })</a>
+                <a asp-controller="ShowInvoiceDetails" asp-action="Details" asp-route-id="@item.WorkshopCode" class="full-row-link">@Html.DisplayFor(modelItem => item.Id, new { htmlAttributes = new { @class = "h4" } })</a>
             </td>
         </tr>
 }
