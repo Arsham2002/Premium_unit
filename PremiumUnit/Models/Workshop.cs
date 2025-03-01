@@ -4,9 +4,13 @@ namespace PremiumUnit.Models;
 
 public enum ActivityType
 {
+    [Display(Name = "آزاد")]
     Manufacturing,
+    [Display(Name = "عادی")]
     Maintenance,
+    [Display(Name = "کمک دولتی")]
     Repair,
+    [Display(Name = "هیچی")]
     Construction
 } 
 
