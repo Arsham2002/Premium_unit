@@ -7,7 +7,10 @@ html {
     font-size: 16px;
   }
 }
-
+*{
+  margin: 0;
+  padding: 0;
+}
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -17,9 +20,9 @@ html {
   min-height: 100%;
 }
 
-body {
+/* body {
   margin-bottom: 60px;
-}
+} */
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
@@ -37,26 +40,29 @@ body {
   justify-content: center;
   align-items: center;
   justify-self: center;
-  width: 80%;
+  width: 70%;
   background-color: #D9D9D9;
   height: 19rem;
   padding: 6rem;
-  
+  padding-top: 1rem;
+  position: relative;
 }
 
 .together{
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
+
   
 }
 
 div .form-group{
-  /* margin-right: 3rem;
-  margin-left: 3rem; */
+  margin-right: 2rem;
+  /* margin-left: 3rem; */
   width: 19rem;
   margin-top: 1.5rem;
+  
 
 
 }
@@ -65,19 +71,38 @@ div .form-group{
   align-items: center;
   text-align: center;
   border: 1px solid black;
+  margin-top: 0.5rem;
 }
 
 .form-select{
 
   border: 1px solid black;
+  margin-top: 0.5rem;
 }
 
 .sus {
+  /* background-color: yellowgreen; */
   display: flex;
-  width: 100%;
-  justify-content: flex-end;
+  width: 90%;
+  flex-direction: row;
+  justify-content: end;
+  position: absolute;
+  align-items: center;
+  bottom: 5px;
+  left: 15px;
+  gap: 10px;
+  a{
+    box-shadow: 0 0 2px #000000ba;
+    width: 100px;
+    background-color: white;
+    color: rgb(138, 8, 60);
+    text-decoration: none;
+    /* text-align: center; */
+    border-radius: 7px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.sus>input{
-  margin-top: 1.5rem;
-}

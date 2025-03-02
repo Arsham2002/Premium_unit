@@ -10,12 +10,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Workshop</h4>
 
-<div class="row">
-    <div >
+<div>
+    <div style="background-color: #787575; width: 70%; justify-self: center; height: 2rem; display: flex; align-items: center; justify-content: center;">
+        <p style="margin-bottom: 0; color: white;">اطلاعات کارگاه</p>
+    </div>
+    <div class="row">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @* <div class="form-group">
@@ -26,18 +27,23 @@
           <div class="together">  
                     <div class="form-group">
                         <label asp-for="EmployerName" class="control-label">نام و نام‌خانوادگی کارفرما</label>
-                        <input asp-for="EmployerName" class="form-control" />
+                        <input asp-for="EmployerName" class="form-control" style="text-align: right;" />
                         <span asp-validation-for="EmployerName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EmployerPhoneNumber" class="control-label">شماره تلفن کارفرما</label>
-                        <input asp-for="EmployerPhoneNumber" class="form-control" />
+                        <input asp-for="EmployerPhoneNumber" class="form-control" placeholder="09" style="text-align: left;" />
                         <span asp-validation-for="EmployerPhoneNumber" class="text-danger"></span>
                     </div>
             </div>            
 
             <div class="together">
-                    <div class="form-group">
+                    <div class="form-group" style="width: 14rem;">
+                        <label asp-for="ActivityStartDate" class="control-label">تاریخ شروع فعالیت</label>
+                        <input asp-for="ActivityStartDate" class="form-control" />
+                        <span asp-validation-for="ActivityStartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="width: 14rem; margin-right: 3.75rem;">
                         <label asp-for="TypeOfActivity" class="control-label">نوع فعالیت</label>
                         <select asp-for="TypeOfActivity" class="form-select">
                             @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
@@ -47,11 +53,6 @@
                         </select>
                         <span asp-validation-for="TypeOfActivity" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="ActivityStartDate" class="control-label">تاریخ شروع فعالیت</label>
-                        <input asp-for="ActivityStartDate" class="form-control" />
-                        <span asp-validation-for="ActivityStartDate" class="text-danger"></span>
-                    </div>
             </div>
             @* <div class="form-group">
                 <label asp-for="Premium" class="control-label"></label>
@@ -59,15 +60,13 @@
                 <span asp-validation-for="Premium" class="text-danger"></span>
             </div> *@
             <div class="sus">
+                <a asp-action="Index">انصراف</a>
                 <input type="submit" value="ثبت اطلاعات" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
