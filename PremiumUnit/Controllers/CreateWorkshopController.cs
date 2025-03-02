@@ -63,9 +63,19 @@ namespace PremiumUnit.Controllers
                     EmployerName = model.EmployerName,
                     EmployerPhoneNumber = model.EmployerPhoneNumber
                 };
-
                 _context.Add(workshop);
                 await _context.SaveChangesAsync();
+                
+                var invoice = new Invoice
+                {
+                    Amount = 0,
+                    IssueDate = DateTime.Now,
+                    PenaltyBaseDate = DateTime.Now,
+                    WorkshopCode = workshop.WorkshopCode
+                };
+                _context.Add(invoice);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
