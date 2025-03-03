@@ -48,7 +48,23 @@
                         <select asp-for="TypeOfActivity" class="form-select">
                             @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
                             {
-                                <option value="@item">@item</option>
+                                <option value="@((int)item)">
+                                @switch ((ActivityType)item)
+                                {
+                                    case ActivityType.Manufacturing:
+                                        @:آزاد
+                                        break;
+                                    case ActivityType.Maintenance:
+                                        @:عادی
+                                        break;
+                                    case ActivityType.Repair:
+                                        @:کمک دولتی
+                                        break;
+                                    default:
+                                        @:هیچی
+                                        break;
+                                }
+                                </option>
                             }
                         </select>
                         <span asp-validation-for="TypeOfActivity" class="text-danger"></span>

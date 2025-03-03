@@ -68,7 +68,7 @@ namespace PremiumUnit.Controllers
                 
                 var invoice = new Invoice
                 {
-                    Amount = 0,
+                    Amount = 3000,
                     IssueDate = DateTime.Now,
                     PenaltyBaseDate = DateTime.Now,
                     WorkshopCode = workshop.WorkshopCode
