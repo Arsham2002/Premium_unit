@@ -4,52 +4,54 @@
     ViewData["Title"] = "Details";
 }
 
-<h3 class='row'>اطلاعات صورت حساب شماره</h3>
-<h3 asp-controller="ShowInvoiceDetails" asp-action="Details" asp-route-id="@Model.WorkshopCode" class="full-row-link">@Html.DisplayFor(modelItem => Model.Id, new { htmlAttributes = new { @class = "h3 row" } })
-
-<div class="container mt-5">
+<div class="d-flex justify-content-end">
+    <h3 asp-controller="ShowInvoiceDetails" asp-action="Details" asp-route-id="@Model.WorkshopCode" class="full-row-link d-inline text-end">@Html.DisplayFor(modelItem => Model.Id, new { htmlAttributes = new { @class = "h3" } })
+    <h3 class='d-inline text-end'>اطلاعات صورت حساب شماره</h3>
+</div>
+<div class="container mt-5" style="background-color: #e0d7c1">
     <form>
-    <div class="row mb-3">
-        <div class="col">
-            <div class='row'>:تاریخ صدور</div>
-            <div class='row text-center pt-3'>
-                @Html.DisplayFor(modelItem => modelItem.IssueDate, new { htmlAttributes = new { @class = "h4" } })
+    <div class="mb-3 justify-item-between">
+        <div class="d-flex justify-content-end">
+            <div class='text-center pt-3 d-inline'>
+                @Html.DisplayFor(modelItem => modelItem.IssueDate, new { htmlAttributes = new { @class = "h3 text-end" } })
             </div>
+            <h5 class='text-end d-inline m-3'>:تاریخ صدور</h5>
         </div>
-        <div class="col">
-            <div class='row'>:مبلغ</div>
-            <div class='row text-center pt-3'>
+        <div class="d-flex justify-content-end">
+            <h5 class='text-start d-inline m-3'>ریال</h5>
+            <div class='text-center pt-3 d-inline'>
                 @Html.DisplayFor(modelItem => modelItem.Amount, new { htmlAttributes = new { @class = "h4" } })
             </div>
+            <h5 class='text-start d-inline m-3'>:مبلغ</h5>
         </div>
-        <div class="col">
-            <div class='row'>:وضعیت</div>
-
+        <div class="d-flex justify-content-end">
             @{if (Model.PaymentDate != null )
             {
-                <div class="text-center row">
-                    <h5 class="text-dark pt-2">‌پرداخت‌شده</h5>
+                <div class="text-center d-inline">
+                    <h5 class="text-dark pt-3">‌پرداخت‌شده</h5>
                 </div>
             }
             else
             {
-                <div class="text-center row">
-                    <h5 class='text-danger pt-2'> پرداخت‌نشده</h5>
+                <div class="text-center d-inline">
+                    <h5 class='text-danger pt-3'>پرداخت‌نشده</h5>
                 </div>
             }}
+            <h5 class='text-start d-inline m-3'>:وضعیت</h5>
         </div>
     </div>
     
-    <div class="mb-3 justify-content-start p-3">
-        <p>این صورت‌حساب به منزله هزینه ثبت کارگاه در سامانه بوده و مدارک ارسال‌شده پس از پرداخت آن بررسی خواهند شد</p>
+    <div class="mb-3 p-3">
+        <h4 class="text-end">:توضیحات</h4>
+        <p class="text-end h4 m-3">این صورت‌حساب به منزله هزینه ثبت کارگاه در سامانه بوده و مدارک ارسال‌شده پس از پرداخت آن بررسی خواهند شد</p>
     </div>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex">
         <form asp-controller="ListInvoices" asp-action="Index" asp-route-code="@Model.WorkshopCode">
-            <button type="submit" class="btn btn-primary">بازگشت</button>
+            <button type="text" class="btn btn-light m-2">بازگشت</button>
         </form>
         <form asp-action="Edit" asp-route-id="@Model.WorkshopCode" method="post">
-            <button type="submit" class="btn btn-secondary">پرداخت</button>
+            <button type="submit" class="btn btn-primary m-2">پرداخت</button>
         </form>
     </div>
     </form>
