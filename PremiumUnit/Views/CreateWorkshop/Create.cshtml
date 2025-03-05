@@ -1,6 +1,3 @@
-
-
-<link rel="stylesheet" href="~/css/site.css">
 <html lang="fa" dir="rtl">
 
 
@@ -11,37 +8,32 @@
 }
 
 
-
-<div>
-    <div style="background-color: #787575; width: 70%; justify-self: center; height: 2rem; display: flex; align-items: center; justify-content: center;">
-        <p style="margin-bottom: 0; color: white;">اطلاعات کارگاه</p>
+<div class="w-75 mx-auto mt-5">
+    <div class="bg-primary d-flex align-items-center justify-content-center" style="height: 2rem;">
+        <p class="mb-0 text-white">اطلاعات کارگاه</p>
     </div>
-    <div class="row">
+
+    <div class="d-flex flex-column align-items-center  w-100 bg-light"  style="height: 19rem; position: relative;">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-          <div class="together">  
-                    <div class="form-group">
+            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+            </div>
+            <div class="d-flex mt-4">
+                <div class="form-group ms-5">
                         <label asp-for="EmployerName" class="control-label">نام و نام‌خانوادگی کارفرما</label>
                         <input asp-for="EmployerName" class="form-control" style="text-align: right;" />
                         <span asp-validation-for="EmployerName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EmployerPhoneNumber" class="control-label">شماره تلفن کارفرما</label>
+                        <label asp-for="EmployerPhoneNumber" class="control-label mt-3">شماره تلفن کارفرما</label>
                         <input asp-for="EmployerPhoneNumber" class="form-control" placeholder="09" style="text-align: left;" />
                         <span asp-validation-for="EmployerPhoneNumber" class="text-danger"></span>
                     </div>
-            </div>            
-
-            <div class="together">
-                    <div class="form-group" style="width: 14rem;">
+                    <div class="form-group me-5 ms-5" style="width: 14rem;">
                         <label asp-for="ActivityStartDate" class="control-label">تاریخ شروع فعالیت</label>
                         <input asp-for="ActivityStartDate" class="form-control" />
                         <span asp-validation-for="ActivityStartDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group" style="width: 14rem; margin-right: 3.75rem;">
-                        <label asp-for="TypeOfActivity" class="control-label">نوع فعالیت</label>
+                        <label asp-for="TypeOfActivity" class="control-label mt-3">نوع فعالیت</label>
                         <select asp-for="TypeOfActivity" class="form-select">
-                            @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
+                             @foreach (var item in ViewBag.ActivityTypes as List<ActivityType>)
                             {
                                 <option value="@((int)item)">
                                 @switch ((ActivityType)item)
@@ -65,10 +57,13 @@
                         <span asp-validation-for="TypeOfActivity" class="text-danger"></span>
                     </div>
             </div>
-            <div class="sus">
-                <a asp-action="Index">انصراف</a>
+            <div class="d-flex flex-row justify-content-end align-items-center position-absolute w-90" style="bottom: 5px; left: 15px; gap: 10px;">
+                <a asp-action="Index" class="d-flex align-items-center shadow-sm w-auto px-3 py-2 bg-white text-danger text-decoration-none rounded " style="width: 100px; height: 35px; ">
+                    انصراف
+                </a>
                 <input type="submit" value="ثبت اطلاعات" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
