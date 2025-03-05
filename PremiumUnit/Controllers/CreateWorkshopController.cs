@@ -75,8 +75,8 @@ namespace PremiumUnit.Controllers
                 };
                 _context.Add(invoice);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                TempData["Code"] = workshop.WorkshopCode;
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         } 

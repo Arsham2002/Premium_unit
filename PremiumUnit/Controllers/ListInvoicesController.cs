@@ -28,6 +28,8 @@ namespace PremiumUnit.Controllers
 
             var invoices = await _context.Invoice
                 .Where(i => i.WorkshopCode == code)
+                .OrderByDescending(i => i.PaymentDate == null)
+                .ThenByDescending(i => i.IssueDate)
                 .ToListAsync();
             if (invoices == null)
             {

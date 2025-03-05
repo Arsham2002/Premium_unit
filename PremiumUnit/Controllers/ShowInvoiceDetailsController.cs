@@ -48,7 +48,7 @@ namespace PremiumUnit.Controllers
 
             invoice.PaymentDate = DateTime.Now;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), "ListInvoices", new { id = invoice.WorkshopCode });
+            return RedirectToAction(nameof(Index), "ListInvoices", new { code = invoice.WorkshopCode });
         }
 
         private bool InvoiceExists(int id)
