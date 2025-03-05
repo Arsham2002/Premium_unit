@@ -47,7 +47,6 @@ namespace PremiumUnit.Controllers
             }
 
             invoice.PaymentDate = DateTime.Now;
-            _context.Update(invoice);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), "ListInvoices", new { id = invoice.WorkshopCode });
         }
